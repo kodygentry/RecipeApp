@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipe App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    body {
+    font-family: sans-serif;
+    }
+
+    h1 {
+    text-align: center;
+    color: #333;
+    }
+
+    #recipe-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    }
+
+    #recipe-form label {
+    display: block;
+    margin-bottom: 10px;
+    }
+
+    #recipe-form input[type="text"],
+    #recipe-form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    }
+
+    #recipe-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    }
+
+    #recipe-form button[type="submit"]:hover {
+    background-color: #45a049;
+    }
+
+    #recipe-list {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+    .recipe-card {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: height 0.5s ease;
+    }
+
+    .recipe-card img {
+    width: 100%;
+    }
+
+    .recipe-card .card-content {
+    padding: 20px;
+    }
+
+    .recipe-card .card-content h2 {
+    margin: 0;
+    font-size: 18px;
+    }
+
+    .recipe-card .card-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    }
+
+    .recipe-card {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+    }
+
+    .recipe-card img {
+    width: 100%;
+    }
+
+    .recipe-card .card-content {
+    padding: 20px;
+    }
+
+    .recipe-card.expanded .card-content p {
+    display: block;
+    }
+
+    .recipe-card .popup:target {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .button{
+        padding: 20;
+    }
+
+    .p{
+        display: block;
+    }
+
+    
+
+    
+
+
+
+  </style>
+  <body>
+    <h1>My Recipe App</h1>
+    <form id="recipe-form">
+      <label>Recipe Name: <input type="text" name="name" /></label>
+      <label>Recipe Image: <input type="file" name="image" /></label>
+      <label>Calories: <input type="text" name="nutrition" /></label>
+      <label>Ingredients: <input type="text" name="ingredients" /></label>
+      <label>Instructions: <input type="text" name="instructions" /></label>
+      <button type="submit">Add Recipe</button>
+    </form>
+    <div id="recipe-list"></div>
+      
+  </body>
+  <script>
+    const form = document.querySelector("#recipe-form");
+    const recipeList = document.querySelector("#recipe-list");
+
+    form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // Get the recipe data from the form
+    const recipe = {
+        name: form.elements.name.value,
+        image: form.elements.image.files[0],
+        nutrition: form.elements.nutrition.value + " calories\n",
+        ingredients: "\n\ningredients: \n" + form.elements.ingredients.value,
+        instructions: "\n\ninstructions: \n" + form.elements.instructions.value,
+    };
+
+    // Create a card for the recipe
+    const card = document.createElement("div");
+    card.classList.add("recipe-card");
+
+    // Create the card image
+    const image = document.createElement("img");
+    image.src = URL.createObjectURL(recipe.image);
+
+    // Create the card content
+    const content = document.createElement("div");
+    content.classList.add("card-content");
+
+    // Create the card title
+    const title = document.createElement("h2");
+    title.textContent = recipe.name;
+
+    // Create the card nutrition
+    const nutrition = document.createElement("p");
+    nutrition.textContent = recipe.nutrition;
+
+    // Create the card ingredients
+    const ingredients = document.createElement("p");
+    ingredients.textContent = recipe.ingredients;
+
+    // Create the card instructions
+    const instructions = document.createElement("p");
+    instructions.textContent = recipe.instructions;
+
+    // Create the card button
+    const button = document.createElement("button");
+    button.textContent = "Show More";
+    button.id = "btn";
+
+    // Add the title, nutrition, ingredients, and instructions to the card content
+    content.appendChild(title);
+    content.appendChild(nutrition);
+    // content.appendChild(ingredients);
+    // content.appendChild(instructions);
+    content.appendChild(button);
+
+    // Add the image and content to the card
+    card.appendChild(image);
+    card.appendChild(content);
+
+    // Add the card to the recipe list
+    recipeList.appendChild(card);
+
+    const targetDiv = document.getElementsByTagName("p");
+    const btn = document.getElementsByTagName("button");
+
+    document.getElementById("brn").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+
+    // Reset the form
+    form.reset();
+    });
+
+
+  </script>
+</html>
