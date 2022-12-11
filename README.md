@@ -1,4 +1,4 @@
-# RecipeApp Demo
+# RecipeApp
 
 # View Page
 to view the page open project in VS Code
